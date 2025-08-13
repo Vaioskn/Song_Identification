@@ -232,19 +232,19 @@ Using the Jamendo API we downloaded **1,000** tracks and, after filtering invali
 
 **Plots (1,000-song tuning set):**
 
-![Accuracy vs clip length (Top-1)](data/STANDARD_FINGEPRINTS/1000/accuracy_vs_clip_top1.png)  
-![Accuracy vs clip length (Top-5)](data/STANDARD_FINGEPRINTS/1000/accuracy_vs_clip_top5.png)  
-![Accuracy vs noise (Top-1)](data/STANDARD_FINGEPRINTS/1000/accuracy_vs_noise_top1.png)  
-![Accuracy vs noise (Top-5)](data/STANDARD_FINGEPRINTS/1000/accuracy_vs_noise_top5.png)  
-![CMC curve](data/STANDARD_FINGEPRINTS/1000/cmc_curve.png)
+![Accuracy vs clip length (Top-1)](data/STANDARD_FINGERPRINTS/1000/accuracy_vs_clip_top1.png)  
+![Accuracy vs clip length (Top-5)](data/STANDARD_FINGERPRINTS/1000/accuracy_vs_clip_top5.png)  
+![Accuracy vs noise (Top-1)](data/STANDARD_FINGERPRINTS/1000/accuracy_vs_noise_top1.png)  
+![Accuracy vs noise (Top-5)](data/STANDARD_FINGERPRINTS/1000/accuracy_vs_noise_top5.png)  
+![CMC curve](data/STANDARD_FINGERPRINTS/1000/cmc_curve.png)
 
 **Plots (200-song test set):**
 
-![Accuracy vs clip length (Top-1)](data/STANDARD_FINGEPRINTS/200/accuracy_vs_clip_top1.png)  
-![Accuracy vs clip length (Top-5)](data/STANDARD_FINGEPRINTS/200/accuracy_vs_clip_top5.png)  
-![Accuracy vs noise (Top-1)](data/STANDARD_FINGEPRINTS/200/accuracy_vs_noise_top1.png)  
-![Accuracy vs noise (Top-5)](data/STANDARD_FINGEPRINTS/200/accuracy_vs_noise_top5.png)  
-![CMC curve](data/STANDARD_FINGEPRINTS/200/cmc_curve.png)
+![Accuracy vs clip length (Top-1)](data/STANDARD_FINGERPRINTS/200/accuracy_vs_clip_top1.png)  
+![Accuracy vs clip length (Top-5)](data/STANDARD_FINGERPRINTS/200/accuracy_vs_clip_top5.png)  
+![Accuracy vs noise (Top-1)](data/STANDARD_FINGERPRINTS/200/accuracy_vs_noise_top1.png)  
+![Accuracy vs noise (Top-5)](data/STANDARD_FINGERPRINTS/200/accuracy_vs_noise_top5.png)  
+![CMC curve](data/STANDARD_FINGERPRINTS/200/cmc_curve.png)
 
 ---
 
