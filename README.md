@@ -449,13 +449,13 @@ Using the Jamendo API we downloaded **1,000** tracks and, after filtering invali
 
 **Embedding similarity distributions:**
 
-![AST — similarity distributions (baseline)](data/TRANFORMERS/AST/similarity_distributions.png)  
-![AST — similarity distributions (enhanced)](data/TRANFORMERS/AST_better/similarity_distributions.png)
+![AST — similarity distributions (baseline)](data/TRANSFORMERS/AST/similarity_distributions.png)  
+![AST — similarity distributions (enhanced)](data/TRANSFORMERS/AST_better/similarity_distributions.png)
 
 **t-SNE by genre:**
 
-![AST — t-SNE (baseline)](data/TRANFORMERS/AST/tsne_genre_visualization.png)  
-![AST — t-SNE (enhanced)](data/TRANFORMERS/AST_better/tsne_genre_visualization.png)
+![AST — t-SNE (baseline)](data/TRANSFORMERS/AST/tsne_genre_visualization.png)  
+![AST — t-SNE (enhanced)](data/TRANSFORMERS/AST_better/tsne_genre_visualization.png)
 
 #### 4.2 Music Understanding Transformer (MERT)
 
