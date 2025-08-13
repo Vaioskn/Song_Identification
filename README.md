@@ -46,16 +46,13 @@ We convert a waveform to a spectrogram with STFT:
 - STFT: `D = librosa.stft(y, n_fft=2048, hop_length=512)`  
 - Magnitude → dB: `S = librosa.amplitude_to_db(np.abs(D))`
 
-Instead of using all time–frequency bins, we select only strong local maxima (“peaks”). A point \((t_0,f_0)\) is a peak if \(|X(t_0,f_0)|\) exceeds all neighbors in a local time–frequency neighborhood.
+Instead of using all time–frequency bins, we select only strong local maxima (“peaks”). A point (t₀, f₀) is a peak if |X(t₀, f₀)| exceeds all neighbors in a local time–frequency neighborhood.
 
-
-
-
-Neighborhood sizes (time \( \tau \) and frequency \( \kappa \)) trade off density vs. salience: larger windows → fewer but stronger peaks; smaller windows → denser peaks (bigger index, higher recall). The selected peaks form a sparse **constellation map**.  
+Neighborhood sizes (time τ and frequency κ) trade off density vs. salience: larger windows → fewer but stronger peaks; smaller windows → denser peaks (bigger index, higher recall). The selected peaks form a sparse **constellation map**.  
 We also apply an **energy threshold**: compute per-frequency median energy and keep peaks only if their magnitude exceeds `ETH * med[f]`, suppressing noisy artifacts.
 
 #### 1.3 Pairwise Landmark Hashing
-A single peak \((t,f)\) is not distinctive enough. We pair peaks: for each **anchor** peak, select **target** peaks occurring shortly after it, and hash the tuple \((f_1, f_2, \Delta t)\) where
+A single peak (t, f) is not distinctive enough. We pair peaks: for each **anchor** peak, select **target** peaks occurring shortly after it, and hash the tuple (f_1, f_2, Δt) where
 
 $$
 \Delta t = t_2 - t_1.
@@ -87,7 +84,7 @@ Key parameters and why they matter:
 We formulate song ID as **embedding retrieval**. A model maps clips to vectors so that two segments from the same song are close (high cosine similarity), and segments from different songs are far apart. Inference computes the query embedding and performs nearest-neighbor search among stored song embeddings.
 
 #### 2.2 Contrastive Learning (InfoNCE)
-We train with **InfoNCE**. For each anchor \(x\), a positive \(x^+\) is another segment from the same song; negatives \(x^-_i\) are from other songs in the batch. With cosine similarity \(\mathrm{sim}(\cdot,\cdot)\) and temperature \(\tau\):
+We train with **InfoNCE**. For each anchor \(x\), a positive \(x^+\) is another segment from the same song; negatives \(x^-_i\) are from other songs in the batch. With cosine similarity sim(·,·) and temperature τ:
 
 $$
 L_{\mathrm{InfoNCE}} = -\log
@@ -95,7 +92,7 @@ L_{\mathrm{InfoNCE}} = -\log
 {\exp(\mathrm{sim}(x,x^+)/\tau) + \sum_i \exp(\mathrm{sim}(x,x^-_i)/\tau)}.
 $$
 
-Smaller \(\tau\) sharpens the softmax and emphasizes hard negatives. We tuned \(\tau \in \{0.07, 0.1\}\).
+Smaller τ sharpens the softmax and emphasizes hard negatives. We tuned τ ∈ {0.07, 0.1}.
 
 #### 2.3 Input Representation: Log-Mel Spectrograms
 We convert each clip to a log-mel spectrogram (e.g., 64 mel bins) and treat it as a single-channel image. This compresses dynamic range and aligns frequency resolution with human hearing. CNNs then learn local time–frequency patterns (harmonics, onsets, rhythms).
@@ -112,7 +109,7 @@ L_{\mathrm{total}} =
 L_{\mathrm{InfoNCE}} + \alpha \,\bigl(L_{\mathrm{CE},\text{clip1}} + L_{\mathrm{CE},\text{clip2}}\bigr).
 $$
 
-A small \(\alpha\) keeps retrieval geometry primary while using supervised signals to stabilize features. Final best: LR \(=10^{-4}\), batch size \(=32\), embedding dim \(=256\), \(\tau=0.07\), \(\alpha=0.25\), Adam optimizer, up to 15 epochs with Reduce-on-Plateau scheduler.
+A small α keeps retrieval geometry primary while using supervised signals to stabilize features. Final best: LR \(=10^{-4}\), batch size \(=32\), embedding dim \(=256\), τ=0.07, α=0.25, Adam optimizer, up to 15 epochs with Reduce-on-Plateau scheduler.
 
 **Batch size:** larger batches provide more in-batch negatives (better contrastive signal) but can hurt generalization. We used 32 due to hardware/memory.
 
@@ -135,14 +132,14 @@ We evaluated **Audio Spectrogram Transformer (AST)** and **Music Understanding T
 
 **Fine-tuning enhancements:**
 - **Attention pooling:** learn to weight frames by importance before forming a clip-level embedding.
-- **Learnable temperature \(\tau\)** for contrastive loss: lets training adapt similarity scaling.
+- **Learnable temperature τ** for contrastive loss: lets training adapt similarity scaling.
 - **Multi-sample dropout:** averages multiple dropout-perturbed heads to stabilize training.
 - **Label smoothing** in the classification head for regularization.
 
 #### 3.3 Music Understanding Transformer (MERT)
 **Architecture & pretraining:** transformer encoder trained with music-specific self-supervision (e.g., masked acoustic modeling with teacher signals), yielding strong melody/pitch/structure awareness.
 
-**Fine-tuning enhancements:** the same set as AST (attention pooling, learnable \(\tau\), label smoothing). MERT proved especially robust under noise.
+**Fine-tuning enhancements:** the same set as AST (attention pooling, learnable τ, label smoothing). MERT proved especially robust under noise.
 
 ---
 
@@ -427,7 +424,7 @@ Using the Jamendo API we downloaded **1,000** tracks and, after filtering invali
 | 10 dB | 51.50% | 86.00% | 83.00% |
 | 0 dB  | 30.50% | 73.00% | 76.50% |
 
-**Enhanced AST** *(attention pooling, learnable \(\tau\), multi-sample dropout, label smoothing)*:
+**Enhanced AST** *(attention pooling, learnable τ, multi-sample dropout, label smoothing)*:
 
 - Top-1:
 
@@ -479,7 +476,7 @@ Using the Jamendo API we downloaded **1,000** tracks and, after filtering invali
 | 10 dB | 68.50% | 82.50% | 91.50% |
 | 0 dB  | 63.00% | 79.50% | 78.00% |
 
-**Enhanced MERT** *(attention pooling, learnable \(\tau\), label smoothing)*:
+**Enhanced MERT** *(attention pooling, learnable τ, label smoothing)*:
 
 - Top-1:
 
@@ -574,5 +571,3 @@ We compared a classical landmark-based audio fingerprinting pipeline against mod
 - **Embeddings** exhibit clear structure (similarity distributions and t-SNE), supporting retrieval-style song ID.
 
 **Future directions:** fuse classical fingerprints with learned embeddings, and explore larger or domain-specialized pretrained backbones for even stronger performance.
-
-
