@@ -501,13 +501,13 @@ Using the Jamendo API we downloaded **1,000** tracks and, after filtering invali
 
 **Embedding similarity distributions:**
 
-![MERT — similarity distributions (baseline)](data/TRANFORMERS/MERT/similarity_distributions.png)  
-![MERT — similarity distributions (enhanced)](data/TRANFORMERS/MERT_better/similarity_distributions.png)
+![MERT — similarity distributions (baseline)](data/TRANSFORMERS/MERT/similarity_distributions.png)  
+![MERT — similarity distributions (enhanced)](data/TRANSFORMERS/MERT_better/similarity_distributions.png)
 
 **t-SNE by genre:**
 
-![MERT — t-SNE (baseline)](data/TRANFORMERS/MERT/tsne_genre_visualization.png)  
-![MERT — t-SNE (enhanced)](data/TRANFORMERS/MERT_better/tsne_genre_visualization.png)
+![MERT — t-SNE (baseline)](data/TRANSFORMERS/MERT/tsne_genre_visualization.png)  
+![MERT — t-SNE (enhanced)](data/TRANSFORMERS/MERT_better/tsne_genre_visualization.png)
 
 ---
 
